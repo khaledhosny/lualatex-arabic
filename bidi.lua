@@ -3,10 +3,10 @@
 --  This work is under the CC0 license.
 
 
-luaarabi-bidi  = { }
+bidi  = { }
 
-luaarabi-bidi.module = {
-  name = "luaarabi-bidi",
+bidi.module = {
+  name = "bidi",
   version = 0.4,
   date = "2009/04/29",
   description = "Bidirectional typesetting in LuaTeX",
@@ -15,7 +15,7 @@ luaarabi-bidi.module = {
   license = "CC0",
 }
 
-luatextra.provides_module(luaarabi-bidi.module)
+luatextra.provides_module(bidi.module)
 
 dofile(kpse.find_file("char-def.lua"))
 local data = characters.data
@@ -26,7 +26,7 @@ local function newtextdir(dir)
   return n
 end
 
-function luaarabi-bidi.mirroring(hlist)
+function bidi.mirroring(hlist)
   local rtl = false
   if tex.textdir == "TRT" then
     rtl = true
@@ -35,7 +35,7 @@ function luaarabi-bidi.mirroring(hlist)
   end
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      luaarabi-bidi.mirroring(n.list)
+      bidi.mirroring(n.list)
     end
     if n.id == node.id("whatsit") and n.subtype == 7 then
       if n.dir == "+TRT" or n.dir == "-TLT" then
@@ -57,12 +57,12 @@ function luaarabi-bidi.mirroring(hlist)
   return hlist
 end
 
-function luaarabi-bidi.numbers(hlist)
+function bidi.numbers(hlist)
   local num = false
 
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      luaarabi-bidi.numbers(n.list)
+      bidi.numbers(n.list)
     end
     if n.id == node.id('glyph') then
       local dir  = data[n.char].direction
@@ -88,7 +88,7 @@ end
   return hlist
 end
 
-callback.add("pre_linebreak_filter", luaarabi-bidi.mirroring, "BiDi mirroring", 1)
-callback.add("pre_linebreak_filter", luaarabi-bidi.numbers, "BiDi number handling", 2)
-callback.add("hpack_filter", luaarabi-bidi.mirroring, "BiDi mirroring", 1)
-callback.add("hpack_filter", luaarabi-bidi.numbers, "BiDi number handling", 2)
+callback.add("pre_linebreak_filter", bidi.mirroring, "BiDi mirroring", 1)
+callback.add("pre_linebreak_filter", bidi.numbers, "BiDi number handling", 2)
+callback.add("hpack_filter", bidi.mirroring, "BiDi mirroring", 1)
+callback.add("hpack_filter", bidi.numbers, "BiDi number handling", 2)

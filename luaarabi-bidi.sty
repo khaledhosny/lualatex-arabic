@@ -5,16 +5,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{luaarabi-bidi}
   [2009/04/29 v0.5  Bidirectional typesetting package for LuaTeX]
+
 \RequirePackage{luatextra}
-
-
-
 \RequirePackage{ifluatex}
 
 \ifluatex
-   \ifx\textdir\@undefined%
-      \luadirect{tex.enableprimitives('',{'pagedir','bodydir','pardir','textdir'})}
-   \fi
 \else
    \newlinechar`\^^J
    \typeout{^^JTo avoid this error message,^^J%
@@ -38,7 +33,7 @@
 \newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
 
 
-\luaUseModule{luaarabi-bidi}
+\luaUseModule{bidi}
 
 
 \def\@sect#1#2#3#4#5#6[#7]#8{%
