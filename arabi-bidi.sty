@@ -71,10 +71,47 @@
   \@xsect{#5}}
 
 
-\def\@tabular{\leavevmode \hbox \bgroup \if@rl\@math@dir{TRT}\fi $\let\@acol\@tabacol
-   \let\@classz\@tabclassz
-   \let\@classiv\@tabclassiv \let\\\@tabularcr\@tabarray}
+% BEGIN TABULAR
 
+% my "buggy" code
+%\def\@tabular{\leavevmode \hbox \bgroup \if@rl\@math@dir{TRT}\fi $\let\@acol\@tabacol
+%   \let\@classz\@tabclassz
+%   \let\@classiv\@tabclassiv \let\\\@tabularcr\@tabarray}
+
+% the follwing from Vafa
+\def\@array[#1]#2{%
+  \if #1t\vtop \else \if#1b\vbox \else \vcenter \fi\fi
+  \bgroup
+  \setbox\@arstrutbox\hbox{%
+    \vrule \@height\arraystretch\ht\strutbox
+           \@depth\arraystretch \dp\strutbox
+           \@width\z@}%
+  \@mkpream{#2}%
+  \edef\@preamble{%
+    \ialign \noexpand\@halignto
+      \bgroup \@arstrut \@preamble \tabskip\z@skip \cr}%
+  \let\@startpbox\@@startpbox \let\@endpbox\@@endpbox
+  \let\tabularnewline\\%
+    \let\par\@empty
+    \let\@sharp##%
+    \set@typeset@protect
+    \lineskip\z@skip\baselineskip\z@skip
+    \ifhmode \@preamerr\z@ \@@par\fi
+  \if@rl\textdir TRT\fi
+    \@preamble}
+
+% swap right and left
+\def\@testpach#1{\@chclass \ifnum \@lastchclass=\tw@ 4 \else
+    \ifnum \@lastchclass=3 5 \else
+     \z@ \if #1c\@chnum \z@ \else
+                              \if \if@rl#1r\else#1l\fi\@chnum \@ne \else
+                              \if \if@rl#1l\else#1r\fi\@chnum \tw@ \else
+          \@chclass \if #1|\@ne \else
+                    \if #1@\tw@ \else
+                    \if #1p3 \else \z@ \@preamerr 0\fi
+  \fi  \fi  \fi  \fi  \fi  \fi
+\fi}
+% END TABULAR
 
 \newif\if@rlmath
 
