@@ -1,4 +1,4 @@
-if not modules then modules = { } end modules ['char-def'] = {
+if not modules then modules = { } end modules ['arabi-char'] = {
     version   = 1.001,
     author    = "Hans Hagen, PRAGMA-ADE, Hasselt NL",
     copyright = "PRAGMA ADE / ConTeXt Development Team",
