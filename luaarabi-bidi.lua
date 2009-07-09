@@ -1,21 +1,12 @@
--- 
---  This is file `luabidi.lua',
---  generated with the docstrip utility.
--- 
---  The original source files were:
--- 
---  luabidi.dtx  (with options: `lua')
---  This is a generated file.
---  
 --  Copyright (C) 2009 by Khaled Hosny <khaledhosny@eglug.org>
 --  
 --  This work is under the CC0 license.
 
 
-luabidi  = { }
+luaarabi-bidi  = { }
 
-luabidi.module = {
-  name = "luabidi",
+luaarabi-bidi.module = {
+  name = "luaarabi-bidi",
   version = 0.4,
   date = "2009/04/29",
   description = "Bidirectional typesetting in LuaTeX",
@@ -24,7 +15,7 @@ luabidi.module = {
   license = "CC0",
 }
 
-luatextra.provides_module(luabidi.module)
+luatextra.provides_module(luaarabi-bidi.module)
 
 dofile(kpse.find_file("char-def.lua"))
 local data = characters.data
@@ -35,7 +26,7 @@ local function newtextdir(dir)
   return n
 end
 
-function luabidi.mirroring(hlist)
+function luaarabi-bidi.mirroring(hlist)
   local rtl = false
   if tex.textdir == "TRT" then
     rtl = true
@@ -44,7 +35,7 @@ function luabidi.mirroring(hlist)
   end
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      luabidi.mirroring(n.list)
+      luaarabi-bidi.mirroring(n.list)
     end
     if n.id == node.id("whatsit") and n.subtype == 7 then
       if n.dir == "+TRT" or n.dir == "-TLT" then
@@ -66,12 +57,12 @@ function luabidi.mirroring(hlist)
   return hlist
 end
 
-function luabidi.numbers(hlist)
+function luaarabi-bidi.numbers(hlist)
   local num = false
 
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      luabidi.numbers(n.list)
+      luaarabi-bidi.numbers(n.list)
     end
     if n.id == node.id('glyph') then
       local dir  = data[n.char].direction
@@ -97,10 +88,7 @@ end
   return hlist
 end
 
-callback.add("pre_linebreak_filter", luabidi.mirroring, "BiDi mirroring", 1)
-callback.add("pre_linebreak_filter", luabidi.numbers, "BiDi number handling", 2)
-callback.add("hpack_filter", luabidi.mirroring, "BiDi mirroring", 1)
-callback.add("hpack_filter", luabidi.numbers, "BiDi number handling", 2)
-
--- 
---  End of File `luabidi.lua'.
+callback.add("pre_linebreak_filter", luaarabi-bidi.mirroring, "BiDi mirroring", 1)
+callback.add("pre_linebreak_filter", luaarabi-bidi.numbers, "BiDi number handling", 2)
+callback.add("hpack_filter", luaarabi-bidi.mirroring, "BiDi mirroring", 1)
+callback.add("hpack_filter", luaarabi-bidi.numbers, "BiDi number handling", 2)

@@ -1,18 +1,9 @@
-%%
-%% This is file `luabidi.sty',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% luabidi.dtx  (with options: `package')
-%% This is a generated file.
-%% 
-%% Copyright (C) 2009 by Khaled Hosny <khaledhosny@eglug.org>
-%% 
-%% This work is under the CC0 license.
+% Copyright (C) 2009 by Khaled Hosny <khaledhosny@eglug.org>
+% 
+% This work is under the CC0 license.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{luabidi}
+\ProvidesPackage{luaarabi-bidi}
   [2009/04/29 v0.5  Bidirectional typesetting package for LuaTeX]
 \RequirePackage{luatextra}
 
@@ -47,7 +38,7 @@
 \newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
 
 
-\luaUseModule{luabidi}
+\luaUseModule{luaarabi-bidi}
 
 
 \def\@sect#1#2#3#4#5#6[#7]#8{%
@@ -136,5 +127,3 @@
 \ProcessOptions\relax
 
 \endinput
-%%
-%% End of file `luabidi.sty'.
