@@ -2,6 +2,9 @@
 
 \ProvidesLanguage{arabic}[2006/01/01 v0.1 Arabic support for the babel system]
 
+\RequirePackage{luaarabi-bidi}
+\RequirePackage{luaarabi-naskhi}
+
 \LdfInit{arabic}{captionsarabic}
 
 \ifx\l@arabic\@undefined
