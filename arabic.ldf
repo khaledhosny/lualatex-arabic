@@ -1,0 +1,54 @@
+\ProvidesFile{arabic.ldf}
+
+\ProvidesLanguage{arabic}[2006/01/01 v0.1 Arabic support for the babel system]
+
+\LdfInit{arabic}{captionsarabic}
+
+\ifx\l@arabic\@undefined
+  \@nopatterns{Arabic}%
+  \adddialect\l@arabic0
+\fi
+
+%NO hyphenation is needed in Arabic!! Update language.dat!!!
+\providehyphenmins{\CurrentOption}{\thr@@\thr@@}
+
+\addto\captionsarabic{%
+\def\prefacename{\RL{مدخل}}% 
+\def\refname{\RL{المراجع}}
+\def\abstractname{\RL{ملخص}}%
+\def\bibname{\RL{المصادر}}%
+\def\chaptername{\RL{الباب}}%
+\def\appendixname{\RL{الماحق}}%
+%\def\contentsname{\RL{ا\lamم\Haaت\waw\yaا\taa}}
+\def\contentsname{\RL{الفهرس}}%
+\def\listfigurename{\RL{قائمة الأشكال}}%
+\def\listtablename{\RL{قائمة الجادول}}%
+\def\indexname{\RL{الفهارس}}%
+\def\figurename{\RL{شكلل}}%
+\def\tablename{\RL{جدولل}}%
+\def\partname{\RL{القسم}}%
+\def\enclname{\RL{المرفقات}}
+\def\ccname{\RL{نسخة موجهة إلى}}% <<
+\def\headtoname{\RL{إلى}}
+\def\pagename{\RL{صفحة}}%
+\def\seename{\RL{راجع}}%انظر
+\def\alsoname{\RL{راجع أيضا}}%<<انظر
+\def\proofname{\RL{برهان}}% for AMS-\LaTeX
+\def\glossaryname{\RL{معجم}}%<<
+}
+
+%
+% The default Arabic date form for now :
+%
+\InputIfFileExists{luarabicore.sty}{%
+  \message{Loading the Common definitions for Arabic}}{%
+  \errhelp{I can't find the luarabicore.sty file}%
+  \errmessage{Since I can't find the luarabicore.sty file^^J
+    I can't typeset Arabic.^^J
+    I stop here, while you get a suitable luarabicore.sty file}\@@end
+}
+\def\datearabic{\def\today{\atoday}}
+
+\ldf@finish{arabic}
+
+\endinput

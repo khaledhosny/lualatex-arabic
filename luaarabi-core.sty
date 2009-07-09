@@ -1,0 +1,21 @@
+\ProvidesFile{luaarabiccore.sty}
+\def\arabimonth#1{\ifcase#1\or
+      يناير\or
+      فبراير\or 
+      مارس\or 
+      أبريل\or 
+      مايو\or 
+      يونيو\or      
+      يوليو\or 
+      أغسطس\or 
+      سبتمبر\or       
+      أكتوبر\or 
+      نوفمبر\or
+      ديسمبر\fi}
+      
+\def\atoday{%
+       \number\day%
+\space \RL{\arabimonth{\month}}%
+\space \number\year}
+
+\endinput

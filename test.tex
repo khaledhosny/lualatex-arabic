@@ -1,0 +1,35 @@
+\documentclass{article}
+%\usepackage{luatex-fonts}
+\usepackage{luaotfload}
+\usepackage[rldocument]{luabidi}
+\usepackage[EU2]{fontenc}
+\usepackage[english,arabic]{babel}
+%\usepackage{adobearabic}
+\usepackage{simplenaskhi}
+
+%%%%%%%
+\input{MyCatCodes}
+\catcode`|=\active
+\def|{\penalty10000}
+\let\حاشية\footnote
+%%%%%%%
+
+\begin{document}
+\author{خالد حسني\footnote{الفقير إلى عفو ربه}}
+\title{مقدمة إلى لواتخ}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+هذه مقدمة إلى استخدام اللغة العربية مع المحرك الطباعي لواتخ وحزمة لاتخ. ينقسم دعم اللغة العربية إلى دعم ثنائية الاتجاه ودعم تركيب الكلمات، بينما توفر لواتخ اللبنات الأساسية المطلوبة لكل منها، إلا أن ضمها لبعضها والاستفادة منها تتطلب دعما على مستوى أعلى، وهو ما تشرحه هذه الحزمة.
+\end{abstract}
+
+\section{مقدمة}
+لواتخ هو محرك تخ جديد بني عبر دمج بي|دي|إف|تخ\حاشية{محرك تخ يدعم \LR{PDF}} و ألِف\حاشية{محرك تخ يدعم اللغة العربية} مع إضافة لغة البرمجة لوا\حاشية{لغة برمجة مدمجة شهيرة} إلى الخليط لبناء نظام طباعي يدعم أنظمة الكتابة المختلفة، ويتج ملفات بي|دي|إف مباشرة ويمكن الإضافة إليه وتمديده وبرمجته.
+\subsection{ثنائية الاتجاه}
+
+\subsection{تركيب الكلمات}
+\subsubsection{أوبن|تيب}
+
+
+\end{document}
