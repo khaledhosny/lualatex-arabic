@@ -17,7 +17,7 @@ luaarabi.module = {
 
 luatextra.provides_module(luaarabi.module)
 
-dofile(kpse.find_file("char-def.lua"))
+dofile(kpse.find_file("luaarabi-char.lua"))
 local data = characters.data
 
 local function newtextdir(dir)
@@ -66,15 +66,16 @@ function luaarabi.numbers(hlist)
     end
     if n.id == node.id('glyph') then
       local dir  = data[n.char].direction
+      --texio.write_nl(n.char)
       --texio.write_nl(dir)
       --if dir == "ar" or dir == "es" or dir == "cs" then dir = "en" end
       if num then
-        if dir == "en" then
+        if dir == "en" or dir == "an" then
         else
           hlist, inserted = node.insert_before(hlist,n,newtextdir("-TLT"))
           num = false
         end
-      elseif dir == "en" then
+      elseif dir == "en" or dir == "an" then
         if n.next and n.next.id == node.id('glyph') then
           hlist, inserted = node.insert_before(hlist,n,newtextdir("+TLT"))
           num = true
