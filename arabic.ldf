@@ -40,9 +40,9 @@
 %
 % The default Arabic date form for now :
 %
-\InputIfFileExists{arabi-core.sty}{%
+\InputIfFileExists{arabic-core.sty}{%
   \message{Loading the Common definitions for Arabic}}{%
-  \errhelp{I can't find the luarabicore.sty file}%
+  \errhelp{I can't find the 'arabic-core.sty' file}%
   \errmessage{Since I can't find the luarabicore.sty file^^J
     I can't typeset Arabic.^^J
     I stop here, while you get a suitable luarabicore.sty file}\@@end

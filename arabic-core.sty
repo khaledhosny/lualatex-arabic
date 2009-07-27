@@ -1,12 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{arabi-core}[2009/07/09 v0.1 Arabi Core]
+\ProvidesPackage{arabic-core}[2009/07/09 v0.1 Arabic Core]
 
 \AtEndOfPackage{
-  \RequirePackage[rldocument]{arabi-bidi}
-  \RequirePackage{arabi-nskh}
+  \RequirePackage[rldocument]{arabic-bidi}
+  \RequirePackage{arabic-nskh}
 }
 
-\def\arabimonth#1{\ifcase#1\or
+\def\arabicmonth#1{\ifcase#1\or
       يناير\or
       فبراير\or 
       مارس\or 
@@ -22,7 +22,7 @@
       
 \def\atoday{%
        \number\day%
-\space \RL{\arabimonth{\month}}%
+\space \RL{\arabicmonth{\month}}%
 \space \number\year}
 
 \endinput

@@ -3,10 +3,10 @@
 --  This work is under the CC0 license.
 
 
-arabi  = { }
+arabic  = { }
 
-arabi.module = {
-  name = "arabi",
+arabic.module = {
+  name = "arabic",
   version = 0.4,
   date = "2009/04/29",
   description = "Bidirectional typesetting in LuaTeX",
@@ -15,9 +15,9 @@ arabi.module = {
   license = "CC0",
 }
 
-luatextra.provides_module(arabi.module)
+luatextra.provides_module(arabic.module)
 
-dofile(kpse.find_file("arabi-char.lua"))
+dofile(kpse.find_file("arabic-char.lua"))
 local data = characters.data
 
 local function newtextdir(dir)
@@ -26,7 +26,7 @@ local function newtextdir(dir)
   return n
 end
 
-function arabi.mirroring(hlist)
+function arabic.mirroring(hlist)
   local rtl = false
   if tex.textdir == "TRT" then
     rtl = true
@@ -35,7 +35,7 @@ function arabi.mirroring(hlist)
   end
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      arabi.mirroring(n.list)
+      arabic.mirroring(n.list)
     end
     if n.id == node.id("whatsit") and n.subtype == 7 then
       if n.dir == "+TRT" or n.dir == "-TLT" then
@@ -57,12 +57,12 @@ function arabi.mirroring(hlist)
   return hlist
 end
 
-function arabi.numbers(hlist)
+function arabic.numbers(hlist)
   local num = false
 
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      arabi.numbers(n.list)
+      arabic.numbers(n.list)
     end
     if n.id == node.id('glyph') then
       local dir  = data[n.char].direction
@@ -89,7 +89,7 @@ end
   return hlist
 end
 
-callback.add("pre_linebreak_filter", arabi.mirroring, "BiDi mirroring", 1)
-callback.add("pre_linebreak_filter", arabi.numbers, "BiDi number handling", 2)
-callback.add("hpack_filter", arabi.mirroring, "BiDi mirroring", 1)
-callback.add("hpack_filter", arabi.numbers, "BiDi number handling", 2)
+callback.add("pre_linebreak_filter", arabic.mirroring, "BiDi mirroring", 1)
+callback.add("pre_linebreak_filter", arabic.numbers, "BiDi number handling", 2)
+callback.add("hpack_filter", arabic.mirroring, "BiDi mirroring", 1)
+callback.add("hpack_filter", arabic.numbers, "BiDi number handling", 2)
