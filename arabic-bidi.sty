@@ -18,10 +18,12 @@
 \fi
 
 
-\def\@text@dir#1{\textdir #1}
-\def\@para@dir#1{\pardir #1}
-\def\@math@dir#1{\mathdir #1}
-\def\@switch@dir#1{\pagedir #1\bodydir #1\pardir #1\textdir #1}
+\def\@page@dir#1{\luatexpagedir #1}
+\def\@body@dir#1{\luatexbodydir #1}
+\def\@para@dir#1{\luatexpardir #1}
+\def\@text@dir#1{\luatextextdir #1}
+\def\@math@dir#1{\luatexmathdir #1}
+\def\@switch@dir#1{\@page@dir{#1}\@body@dir{#1}\@para@dir{#1}\@text@dir{#1}}
 
 
 \newif\if@rl
@@ -97,7 +99,7 @@
     \set@typeset@protect
     \lineskip\z@skip\baselineskip\z@skip
     \ifhmode \@preamerr\z@ \@@par\fi
-  \if@rl\textdir TRT\fi
+  \if@rl\@text@dir{TRT}\fi
     \@preamble}
 
 % swap right and left
