@@ -1,5 +1,15 @@
 \documentclass{article}
 \usepackage[english,arabic]{babel}
+\usepackage{fontspec}
+
+\setmainfont[
+	 Script=Arabic,
+	 Language=Default,
+	 Contextuals={WordInitial,WordFinal,Inner},
+	 Ligatures={Common,Required},
+	 RawFeature={+mark;+mkmk;+anum},
+	]
+	{Simple Naskhi}
 
 \begin{document}
 \author{خالد حسني\footnote{الفقير إلى عفو ربه}}
