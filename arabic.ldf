@@ -1,6 +1,6 @@
 \ProvidesFile{arabic.ldf}
 
-\ProvidesLanguage{arabic}[2006/01/01 v0.1 Arabic support for the babel system]
+\ProvidesLanguage{arabic}[2009/12/04 v0.1 Arabic support for the babel system]
 
 \LdfInit{arabic}{captionsarabic}
 
@@ -19,7 +19,7 @@
 \def\bibname{\RL{المصادر}}%
 \def\chaptername{\RL{الباب}}%
 \def\appendixname{\RL{الماحق}}%
-%\def\contentsname{\RL{ا\lamم\Haaت\waw\yaا\taa}}
+%\def\contentsname{\RL{المحتويات}}
 \def\contentsname{\RL{الفهرس}}%
 \def\listfigurename{\RL{قائمة الأشكال}}%
 \def\listtablename{\RL{قائمة الجادول}}%
@@ -43,7 +43,7 @@
 \InputIfFileExists{arabic-core.sty}{%
   \message{Loading the Common definitions for Arabic}}{%
   \errhelp{I can't find the 'arabic-core.sty' file}%
-  \errmessage{Since I can't find the luarabicore.sty file^^J
+  \errmessage{Since I can't find the arabic-core.sty file^^J
     I can't typeset Arabic.^^J
     I stop here, while you get a suitable luarabicore.sty file}\@@end
 }
