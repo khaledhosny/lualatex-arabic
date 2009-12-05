@@ -65,7 +65,8 @@ function arabic.numbers(hlist)
       --texio.write_nl(dir)
       --if dir == "ar" or dir == "es" or dir == "cs" then dir = "en" end
       if num then
-        if dir ~= "en" or dir ~= "an" then
+        if dir == "en" or dir == "an" then
+        else
           hlist, inserted = node.insert_before(hlist,n,newtextdir("-TLT"))
           num = false
         end
@@ -87,3 +88,14 @@ callback.add("pre_linebreak_filter", arabic.mirroring, "BiDi mirroring",       1
 callback.add("pre_linebreak_filter", arabic.numbers,   "BiDi number handling", 2)
 callback.add("hpack_filter",         arabic.mirroring, "BiDi mirroring",       1)
 callback.add("hpack_filter",         arabic.numbers,   "BiDi number handling", 2)
+
+arabic.months = {
+	"يناير", "فبراير", "مارس",
+	"أبريل", "مايو", "يونيو",
+	"يوليو", "أغسطس", "سبتمبر",
+	"أكتوبر", "نوفمبر", "ديسمبر",
+}
+
+function arabic.month(n)
+	tex.sprint(arabic.months[n])
+end

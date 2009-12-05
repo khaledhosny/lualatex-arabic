@@ -5,19 +5,7 @@
   \RequirePackage[rldocument]{arabic-bidi}
 }
 
-\def\arabicmonth#1{\ifcase#1\or
-      يناير\or
-      فبراير\or 
-      مارس\or 
-      أبريل\or 
-      مايو\or 
-      يونيو\or      
-      يوليو\or 
-      أغسطس\or 
-      سبتمبر\or       
-      أكتوبر\or 
-      نوفمبر\or
-      ديسمبر\fi}
+\def\arabicmonth#1{\luadirect{arabic.month(\the#1)}}
       
 \def\atoday{%
        \number\day%
