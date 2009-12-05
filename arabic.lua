@@ -1,18 +1,13 @@
---  Copyright (C) 2009 by Khaled Hosny <khaledhosny@eglug.org>
---  
---  This work is under the CC0 license.
-
-
-arabic  = { }
+arabic        = { }
 
 arabic.module = {
-  name = "arabic",
-  version = 0.4,
-  date = "2009/04/29",
+  name        = "arabic",
+  version     = 0.4,
+  date        = "2009/04/29",
   description = "Bidirectional typesetting in LuaTeX",
-  author = "Khaled Hosny",
-  copyright = "Khaled Hosny",
-  license = "CC0",
+  author      = "Khaled Hosny",
+  copyright   = "Khaled Hosny",
+  license     = "CC0",
 }
 
 luatextra.provides_module(arabic.module)
@@ -70,8 +65,7 @@ function arabic.numbers(hlist)
       --texio.write_nl(dir)
       --if dir == "ar" or dir == "es" or dir == "cs" then dir = "en" end
       if num then
-        if dir == "en" or dir == "an" then
-        else
+        if dir ~= "en" or dir ~= "an" then
           hlist, inserted = node.insert_before(hlist,n,newtextdir("-TLT"))
           num = false
         end
@@ -79,7 +73,7 @@ function arabic.numbers(hlist)
         if n.next and n.next.id == node.id('glyph') then
           hlist, inserted = node.insert_before(hlist,n,newtextdir("+TLT"))
           num = true
-end
+        end
       end
     elseif num then
       hlist, inserted = node.insert_before(hlist,n,newtextdir("-TLT"))
@@ -89,7 +83,7 @@ end
   return hlist
 end
 
-callback.add("pre_linebreak_filter", arabic.mirroring, "BiDi mirroring", 1)
-callback.add("pre_linebreak_filter", arabic.numbers, "BiDi number handling", 2)
-callback.add("hpack_filter", arabic.mirroring, "BiDi mirroring", 1)
-callback.add("hpack_filter", arabic.numbers, "BiDi number handling", 2)
+callback.add("pre_linebreak_filter", arabic.mirroring, "BiDi mirroring",       1)
+callback.add("pre_linebreak_filter", arabic.numbers,   "BiDi number handling", 2)
+callback.add("hpack_filter",         arabic.mirroring, "BiDi mirroring",       1)
+callback.add("hpack_filter",         arabic.numbers,   "BiDi number handling", 2)
