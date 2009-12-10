@@ -1,18 +1,18 @@
-arabic        = { }
+arabi        = { }
 
-arabic.module = {
-  name        = "arabic",
-  version     = 0.4,
-  date        = "2009/04/29",
-  description = "Bidirectional typesetting in LuaTeX",
-  author      = "Khaled Hosny",
+arabi.module = {
+  name        = "arabi",
+  version     = 0.5,
+  date        = "2009/12/11",
+  description = "Arabi Arabic typesetting system",
+  author      = "Khaled Hosny & Hans Hagans",
   copyright   = "Khaled Hosny",
-  license     = "CC0",
+  license     = "GPLv3",
 }
 
-luatextra.provides_module(arabic.module)
+luatextra.provides_module(arabi.module)
 
-dofile(kpse.find_file("arabic-char.lua"))
+dofile(kpse.find_file("arabi-char.lua"))
 local data = characters.data
 
 local function newtextdir(dir)
@@ -21,7 +21,7 @@ local function newtextdir(dir)
   return n
 end
 
-function arabic.mirroring(hlist)
+function arabi.mirroring(hlist)
   local rtl = false
   if tex.textdir == "TRT" then
     rtl = true
@@ -30,7 +30,7 @@ function arabic.mirroring(hlist)
   end
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      arabic.mirroring(n.list)
+      arabi.mirroring(n.list)
     end
     if n.id == node.id("whatsit") and n.subtype == 7 then
       if n.dir == "+TRT" or n.dir == "-TLT" then
@@ -52,12 +52,12 @@ function arabic.mirroring(hlist)
   return hlist
 end
 
-function arabic.numbers(hlist)
+function arabi.numbers(hlist)
   local num = false
 
   for n in node.traverse(hlist) do
     if n.id == node.id('hlist') then
-      arabic.numbers(n.list)
+      arabi.numbers(n.list)
     end
     if n.id == node.id('glyph') then
       local dir  = data[n.char].direction
@@ -84,12 +84,12 @@ function arabic.numbers(hlist)
   return hlist
 end
 
-callback.add("pre_linebreak_filter", arabic.mirroring, "BiDi mirroring",       1)
-callback.add("pre_linebreak_filter", arabic.numbers,   "BiDi number handling", 2)
-callback.add("hpack_filter",         arabic.mirroring, "BiDi mirroring",       1)
-callback.add("hpack_filter",         arabic.numbers,   "BiDi number handling", 2)
+callback.add("pre_linebreak_filter", arabi.mirroring, "BiDi mirroring",       1)
+callback.add("pre_linebreak_filter", arabi.numbers,   "BiDi number handling", 2)
+callback.add("hpack_filter",         arabi.mirroring, "BiDi mirroring",       1)
+callback.add("hpack_filter",         arabi.numbers,   "BiDi number handling", 2)
 
-arabic.months = {
+local months = {
 	default = {
 		"يناير", "فبراير", "مارس",
 		"أبريل", "مايو", "يونيو",
@@ -128,8 +128,6 @@ arabic.months = {
 	},
 }
 
-arabic.months.tunisia = arabic.months.algeria
+months.tunisia = months.algeria
 
-function arabic.month(n,locale)
-	tex.sprint(arabic.months[locale][n])
-end
+function arabi.month(n,locale) return tex.sprint(months[locale][n]) end

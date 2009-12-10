@@ -1,6 +1,6 @@
 \ProvidesFile{arabic.ldf}
 
-\ProvidesLanguage{arabic}[2009/12/04 v0.1 Arabic support for the babel system]
+\ProvidesLanguage{arabic}[2009/12/11 v0.2 Arabic support for the babel system]
 
 \LdfInit{arabic}{captionsarabic}
 
@@ -40,12 +40,12 @@
 %
 % The default Arabic date form for now :
 %
-\InputIfFileExists{arabic-core.sty}{%
+\InputIfFileExists{arabi-core.sty}{%
   \message{Loading the Common definitions for Arabic}}{%
-  \errhelp{I can't find the 'arabic-core.sty' file}%
-  \errmessage{Since I can't find the arabic-core.sty file^^J
+  \errhelp{I can't find the 'arabi-core.sty' file}%
+  \errmessage{Since I can't find the arabi-core.sty file^^J
     I can't typeset Arabic.^^J
-    I stop here, while you get a suitable luarabicore.sty file}\@@end
+    I stop here, while you get a suitable arabi-core.sty file}\@@end
 }
 \def\datearabic{\def\today{\atoday}}
 

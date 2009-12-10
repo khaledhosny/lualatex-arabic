@@ -1,10 +1,10 @@
 % Copyright (C) 2009 by Khaled Hosny <khaledhosny@eglug.org>
 % 
-% This work is under the CC0 license.
+% This work is under the GPLv3 license.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{arabic-bidi}
-  [2009/04/29 v0.5  Bidirectional typesetting package for LuaTeX]
+\ProvidesPackage{arabi-bidi}
+  [2009/04/29 v0.5  Arabi Bidirectional support]
 
 \RequirePackage{luatextra}
 \RequirePackage{ifluatex}
@@ -35,7 +35,7 @@
 \newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
 
 
-\luatexUseModule{arabic}
+\luatexUseModule{arabi}
 
 
 \def\@sect#1#2#3#4#5#6[#7]#8{%

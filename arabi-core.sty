@@ -1,0 +1,15 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{arabi-core}[2009/12/11 v0.2 Arabi Arabic typesetting system]
+
+\AtEndOfPackage{
+  \RequirePackage[rldocument]{arabi-bidi}
+}
+
+\def\arabicmonth#1{\luadirect{arabi.month(\the#1,"default")}}
+      
+\def\atoday{%
+       \number\day%
+\space \RL{\arabicmonth{\month}}%
+\space \number\year}
+
+\endinput
