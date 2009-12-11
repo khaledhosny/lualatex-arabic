@@ -131,3 +131,35 @@ local months = {
 months.tunisia = months.algeria
 
 function arabi.month(n,locale) return tex.sprint(months[locale][n]) end
+
+local abjad = {
+    { "ا", "ب", "ج", "د", "ه", "و", "ز", "ح", "ط" },
+    { "ي", "ك", "ل", "م", "ن", "س", "ع", "ف", "ص" },
+    { "ق", "ر", "ش", "ت", "ث", "خ", "ذ", "ض", "ظ" },
+    { "غ" },
+}
+
+function arabi.abjad(n)
+    local result = ""
+    if n >= 1000 then
+        for i=1,math.floor(n/1000) do
+            result = result .. abjad[4][1]
+        end
+        n = math.mod(n,1000)
+    end
+    if n >= 100 then
+        result = result .. abjad[3][math.floor(n/100)]
+        n = math.mod(n, 100)
+    end
+    if n >= 10 then
+        result = result .. abjad[2][math.floor(n/10)]
+        n = math.mod(n, 10)
+    end
+    if n >= 1 then
+        result = result .. abjad[1][math.floor(n/1)]
+    end
+    if result == "ه" then result = "ه‍" end
+    return result
+end
+
+function arabi.abjadnumerals(n) return tex.sprint(arabi.abjad(n)) end
