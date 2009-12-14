@@ -33,13 +33,7 @@
   \def\glossaryname{\RL{معجم}}%<<
   }
 
-\InputIfFileExists{arabi-core.sty}{%
-  \message{Loading the Common definitions for Arabic}}{%
-  \errhelp{I can't find the 'arabi-core.sty' file}%
-  \errmessage{Since I can't find the arabi-core.sty file^^J
-    I can't typeset Arabic.^^J
-    I stop here, while you get a suitable arabi-core.sty file}\@@end
-}
+\AtEndOfPackage{\RequirePackage[rldocument]{arabi}}
 
 \def\datearabic{\def\today{\atoday}}
 

@@ -8,6 +8,7 @@
 
 \RequirePackage{luatextra}
 \RequirePackage{ifluatex}
+\luatexRequireModule{arabi}
 
 \ifluatex
 \else
@@ -33,9 +34,6 @@
 \def\setLR{\@rlfalse\@switch@dir{TLT}}
 \newenvironment{rltext}{\@rltrue\@para@dir{TRT}\@text@dir{TRT}}{}
 \newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
-
-
-\luatexUseModule{arabi}
 
 
 \def\@sect#1#2#3#4#5#6[#7]#8{%
@@ -154,6 +152,13 @@
   \@text@dir{TLT}%
 \fi%
 \csname the#1\endcsname\quad}}
+
+
+\def\atoday{%
+       \number\day%
+\space \RL{\luadirect{arabi.month()}}%
+\space \number\year}
+
 
 
 \DeclareOption{rldocument} {\@switch@dir{TRT}\@rltrue}
