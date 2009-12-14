@@ -12,6 +12,8 @@ arabi.module    = {
 
 luatextra.provides_module(arabi.module)
 
+arabi.locale = "default"
+
 dofile(kpse.find_file("arabi-char.lua"))
 local data = characters.data
 
@@ -128,7 +130,11 @@ local months = {
 
 months.tunisia = months.algeria
 
-function arabi.month(locale) return tex.sprint(months[locale][tex.month]) end
+function arabi.month(locale, month)
+	local l = locale or arabi.locale
+	local m = month  or tex.month
+	return tex.sprint(months[l][m])
+end
 
 local abjad = {
     { "ا", "ب", "ج", "د", "ه", "و", "ز", "ح", "ط" },
