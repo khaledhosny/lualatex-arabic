@@ -128,7 +128,7 @@ local months = {
 
 months.tunisia = months.algeria
 
-function arabi.month(n,locale) return tex.sprint(months[locale][n]) end
+function arabi.month(locale) return tex.sprint(months[locale][tex.month]) end
 
 local abjad = {
     { "ا", "ب", "ج", "د", "ه", "و", "ز", "ح", "ط" },

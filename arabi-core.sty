@@ -5,11 +5,11 @@
   \RequirePackage[rldocument]{arabi-bidi}
 }
 
-\def\arabicmonth#1{\luadirect{arabi.month(\the#1,"default")}}
+\def\arabicmonth{\luadirect{arabi.month("default")}}
       
 \def\atoday{%
        \number\day%
-\space \RL{\arabicmonth{\month}}%
+\space \RL{\arabicmonth}%
 \space \number\year}
 
 \endinput
