@@ -12,7 +12,10 @@ arabi.module    = {
 
 luatextra.provides_module(arabi.module)
 
-arabi.locale = "default"
+arabi.options = {
+    locale = "default",
+    global = false,
+}
 
 dofile(kpse.find_file("arabi-char.lua"))
 local data = characters.data
@@ -131,13 +134,13 @@ local months = {
 months.tunisia = months.algeria
 
 function arabi.month(locale, month)
-    local l = locale or arabi.locale
+    local l = locale or arabi.options.locale
     local m = month  or tex.month
     return months[l][m]
 end
 
 function arabi.today(locale)
-    local l = locale or arabi.locale
+    local l = locale or arabi.options.locale
     local d = string.format("%d %s %d", tex.day, arabi.month(l), tex.year)
     return d
 end
