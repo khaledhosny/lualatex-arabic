@@ -131,9 +131,15 @@ local months = {
 months.tunisia = months.algeria
 
 function arabi.month(locale, month)
-	local l = locale or arabi.locale
-	local m = month  or tex.month
-	return tex.sprint(months[l][m])
+    local l = locale or arabi.locale
+    local m = month  or tex.month
+    return months[l][m]
+end
+
+function arabi.today(locale)
+    local l = locale or arabi.locale
+    local d = string.format("%d %s %d", tex.day, arabi.month(l), tex.year)
+    return d
 end
 
 local abjad = {

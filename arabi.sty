@@ -3,7 +3,7 @@
 % This work is under the GPLv3 license.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{arabi-bidi}
+\ProvidesPackage{arabi}
   [2009/04/29 v0.5  Arabi Bidirectional support]
 
 \RequirePackage{luatextra}
@@ -154,11 +154,7 @@
 \csname the#1\endcsname\quad}}
 
 
-\def\atoday{%
-       \number\day%
-\space \RL{\luadirect{arabi.month()}}%
-\space \number\year}
-
+\def\atoday{\luadirect{tex.sprint(arabi.today())}}
 
 
 \DeclareOption{rldocument} {\@switch@dir{TRT}\@rltrue}
