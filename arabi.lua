@@ -176,3 +176,15 @@ function arabi.abjad(n)
 end
 
 function arabi.abjadnumerals(n) return tex.sprint(arabi.abjad(n)) end
+
+function arabi.catcodes()
+    local arabic_letters = {
+        "ا", "ء", "أ", "إ", "آ", "ب", "ت", "ث", "ج", "ح", "خ", "د",
+        "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف",
+        "ق", "ك", "ل", "م", "ن", "ه", "ة", "و", "ؤ", "ي", "ى", "ئ",
+    }
+
+    for c in pairs(arabic_letters) do
+        tex.sprint(string.format([[\catcode`%s=11]], c))
+    end
+end
