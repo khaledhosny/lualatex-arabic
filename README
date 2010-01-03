@@ -1,7 +1,8 @@
-This package will eventually provide Arabic support for LuaLaTeX, it is
-work in progress and far from being finished.
+This is just a toy package I use for experimenting Arabic related stuff
+in LuaLaTeX, may be one day it'll turn into a real Arabic support package.
 
-Khaled Hosny khaledhosny@eglug.org
+Khaled Hosny
+khaledhosny@eglug.org
 
-27 July 2009
+03 Jan 2010
 

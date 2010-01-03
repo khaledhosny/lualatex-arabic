@@ -1,7 +1,7 @@
 \ProvidesLanguage{arabic}
-       [2009/12/11 v0.2 Arabic support for the babel system]
+       [2010/01/03 v0.3 Arabic support for the babel system]
 
-\LdfInit{arabic}\captionsarabic
+\LdfInit{arabic}{captionsarabic}
 
 \ifx\l@arabic\@undefined
   \@nopatterns{Arabic}
@@ -33,9 +33,159 @@
   \def\glossaryname{\RL{معجم}}%<<
   }
 
-\AtEndOfPackage{\RequirePackage[rldocument]{arabi}}
+\AtEndOfPackage{
+\RequirePackage{luatextra}
+\RequirePackage{ifluatex}
+\luatexRequireModule{arabi}
 
-\def\datearabic{\def\today{\atoday}}
+\ifluatex
+\else
+   \newlinechar`\^^J
+   \typeout{^^JTo avoid this error message,^^J%
+     run LuaTeX engine instead of regular TeX.^^J}
+   \errmessage{Arabic Support Error: use LuaTeX engine}%
+\fi
+
+\@switch@dir{TRT}\@rltrue
+}
+
+
+\def\@page@dir#1{\luatexpagedir #1}
+\def\@body@dir#1{\luatexbodydir #1}
+\def\@para@dir#1{\luatexpardir #1}
+\def\@text@dir#1{\luatextextdir #1}
+\def\@math@dir#1{\luatexmathdir #1}
+\def\@switch@dir#1{\@page@dir{#1}\@body@dir{#1}\@para@dir{#1}\@text@dir{#1}}
+
+
+\newif\if@rl
+\def\LR#1{{\@rlfalse\@text@dir{TLT}#1}}
+\def\RL#1{{\@rltrue\@text@dir{TRT}#1}}
+\def\setRL{\@rltrue\@switch@dir{TRT}}
+\def\setLR{\@rlfalse\@switch@dir{TLT}}
+\newenvironment{rltext}{\@rltrue\@para@dir{TRT}\@text@dir{TRT}}{}
+\newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
+
+
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+    \begingroup
+      #6{%
+        \@hangfrom{\hskip #3\relax\@svsec}%
+          \interlinepenalty \@M #8\@@par}%
+    \endgroup
+    \csname #1mark\endcsname{#7}%
+    \addcontentsline{toc}{#1}{%
+      \ifnum #2>\c@secnumdepth \else
+        \protect\numberline{\csname the#1\endcsname}%
+      \fi
+      \if@rl{\@text@dir{TRT}#7}%
+      \else{\@text@dir{TLT}#7}\fi}%
+  \else
+    \def\@svsechd{%
+      #6{\hskip #3\relax
+      \@svsec #8}%
+      \csname #1mark\endcsname{#7}%
+      \addcontentsline{toc}{#1}{%
+        \ifnum #2>\c@secnumdepth \else
+          \protect\numberline{\csname the#1\endcsname}%
+        \fi
+        #7}}%
+  \fi
+  \@xsect{#5}}
+
+
+% BEGIN TABULAR
+
+% my "buggy" code
+%\def\@tabular{\leavevmode \hbox \bgroup \if@rl\@math@dir{TRT}\fi $\let\@acol\@tabacol
+%   \let\@classz\@tabclassz
+%   \let\@classiv\@tabclassiv \let\\\@tabularcr\@tabarray}
+
+% the follwing from Vafa
+\def\@array[#1]#2{%
+  \if #1t\vtop \else \if#1b\vbox \else \vcenter \fi\fi
+  \bgroup
+  \setbox\@arstrutbox\hbox{%
+    \vrule \@height\arraystretch\ht\strutbox
+           \@depth\arraystretch \dp\strutbox
+           \@width\z@}%
+  \@mkpream{#2}%
+  \edef\@preamble{%
+    \ialign \noexpand\@halignto
+      \bgroup \@arstrut \@preamble \tabskip\z@skip \cr}%
+  \let\@startpbox\@@startpbox \let\@endpbox\@@endpbox
+  \let\tabularnewline\\%
+    \let\par\@empty
+    \let\@sharp##%
+    \set@typeset@protect
+    \lineskip\z@skip\baselineskip\z@skip
+    \ifhmode \@preamerr\z@ \@@par\fi
+  \if@rl\@text@dir{TRT}\fi
+    \@preamble}
+
+% swap right and left
+\def\@testpach#1{\@chclass \ifnum \@lastchclass=\tw@ 4 \else
+    \ifnum \@lastchclass=3 5 \else
+     \z@ \if #1c\@chnum \z@ \else
+                              \if \if@rl#1r\else#1l\fi\@chnum \@ne \else
+                              \if \if@rl#1l\else#1r\fi\@chnum \tw@ \else
+          \@chclass \if #1|\@ne \else
+                    \if #1@\tw@ \else
+                    \if #1p3 \else \z@ \@preamerr 0\fi
+  \fi  \fi  \fi  \fi  \fi  \fi
+\fi}
+% END TABULAR
+
+\newif\if@rlmath
+
+\def\@my@startmath{\if@rl\if@rlmath\bgroup\@math@dir{TRT}\fi\fi$}
+\def\@my@stopmath{$\if@rl\if@rlmath\egroup\fi\fi}
+\def\@my@startdisplaymath{\if@rl\if@rlmath\bgroup\@math@dir{TRT}\fi\fi$$}
+\def\@my@stopdisplaymath{$$\if@rl\if@rlmath\egroup\fi\fi}
+\def\({\relax\ifmmode\@badmath\else\@my@startmath\fi}
+\def\){\relax\ifmmode\ifinner\@my@stopmath\else\@badmath\fi\else \@badmath\fi}
+\def\[{%
+   \relax\ifmmode
+      \@badmath
+   \else
+      \ifvmode
+         \nointerlineskip
+         \makebox[.6\linewidth]{}%
+      \fi
+      \@my@startdisplaymath%%$$ BRACE MATCH HACK
+   \fi
+}
+\def\]{%
+   \relax\ifmmode
+      \ifinner
+         \@badmath
+      \else
+         \@my@stopdisplaymath%%$$ BRACE MATCH HACK
+      \fi
+   \else
+      \@badmath
+   \fi
+   \ignorespaces
+}
+
+\def\@seccntformat#1{{%
+\if@rl%
+  \@text@dir{TRT}%
+\else%
+  \@text@dir{TLT}%
+\fi%
+\csname the#1\endcsname\quad}}
+
+
+\def\datearabic{\def\today{\luadirect{tex.sprint(arabi.today())}}}
 
 \ldf@finish{arabic}
 
