@@ -35,19 +35,9 @@
 
 \AtEndOfPackage{
 \RequirePackage{luatexbase}
+\RequireLuaModule{arabi}
 \RequirePackage{luadirections}
 \bidion
-\RequirePackage{ifluatex}
-\RequireLuaModule{arabi}
-
-\ifluatex
-\else
-   \newlinechar`\^^J
-   \typeout{^^JTo avoid this error message,^^J%
-     run LuaTeX engine instead of regular TeX.^^J}
-   \errmessage{Arabic Support Error: use LuaTeX engine}%
-\fi
-
 \@switch@dir{TRT}\@rltrue
 }
 
