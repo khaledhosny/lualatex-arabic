@@ -66,42 +66,6 @@
 \newenvironment{rltext}{\@rltrue\@para@dir{TRT}\@text@dir{TRT}}{}
 \newenvironment{lrtext}{\@rlfalse\@para@dir{TLT}\@text@dir{TLT}}{}
 
-
-\def\@sect#1#2#3#4#5#6[#7]#8{%
-  \ifnum #2>\c@secnumdepth
-    \let\@svsec\@empty
-  \else
-    \refstepcounter{#1}%
-    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
-  \fi
-  \@tempskipa #5\relax
-  \ifdim \@tempskipa>\z@
-    \begingroup
-      #6{%
-        \@hangfrom{\hskip #3\relax\@svsec}%
-          \interlinepenalty \@M #8\@@par}%
-    \endgroup
-    \csname #1mark\endcsname{#7}%
-    \addcontentsline{toc}{#1}{%
-      \ifnum #2>\c@secnumdepth \else
-        \protect\numberline{\csname the#1\endcsname}%
-      \fi
-      \if@rl{\@text@dir{TRT}#7}%
-      \else{\@text@dir{TLT}#7}\fi}%
-  \else
-    \def\@svsechd{%
-      #6{\hskip #3\relax
-      \@svsec #8}%
-      \csname #1mark\endcsname{#7}%
-      \addcontentsline{toc}{#1}{%
-        \ifnum #2>\c@secnumdepth \else
-          \protect\numberline{\csname the#1\endcsname}%
-        \fi
-        #7}}%
-  \fi
-  \@xsect{#5}}
-
-
 % BEGIN TABULAR
 
 % my "buggy" code
@@ -175,15 +139,6 @@
    \fi
    \ignorespaces
 }
-
-\def\@seccntformat#1{{%
-\if@rl%
-  \@text@dir{TRT}%
-\else%
-  \@text@dir{TLT}%
-\fi%
-\csname the#1\endcsname\quad}}
-
 
 \def\datearabic{\def\today{\luadirect{tex.sprint(arabi.today())}}}
 
