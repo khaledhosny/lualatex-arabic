@@ -35,6 +35,8 @@
 
 \AtEndOfPackage{
 \RequirePackage{luatexbase}
+\RequirePackage{luadirections}
+\bidion
 \RequirePackage{ifluatex}
 \RequireLuaModule{arabi}
 
