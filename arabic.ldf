@@ -9,28 +9,28 @@
 \fi
 
 \addto\captionsarabic{%
-  \def\prefacename{\RL{مدخل}}%
-  \def\refname{\RL{المراجع}}
-  \def\abstractname{\RL{ملخص}}%
-  \def\bibname{\RL{المصادر}}%
-  \def\chaptername{\RL{الباب}}%
-  \def\appendixname{\RL{الماحق}}%
- %\def\contentsname{\RL{المحتويات}}
-  \def\contentsname{\RL{الفهرس}}%
-  \def\listfigurename{\RL{قائمة الأشكال}}%
-  \def\listtablename{\RL{قائمة الجادول}}%
-  \def\indexname{\RL{الفهارس}}%
-  \def\figurename{\RL{شكلل}}%
-  \def\tablename{\RL{جدولل}}%
-  \def\partname{\RL{القسم}}%
-  \def\enclname{\RL{المرفقات}}
-  \def\ccname{\RL{نسخة موجهة إلى}}% <<
-  \def\headtoname{\RL{إلى}}
-  \def\pagename{\RL{صفحة}}%
-  \def\seename{\RL{راجع}}%انظر
-  \def\alsoname{\RL{راجع أيضا}}%<<انظر
-  \def\proofname{\RL{برهان}}% for AMS-\LaTeX
-  \def\glossaryname{\RL{معجم}}%<<
+  \def\prefacename{مدخل}%
+  \def\refname{المراجع}
+  \def\abstractname{ملخص}%
+  \def\bibname{المصادر}%
+  \def\chaptername{الباب}%
+  \def\appendixname{الماحق}%
+ %\def\contentsname{المحتويات}
+  \def\contentsname{الفهرس}%
+  \def\listfigurename{قائمة الأشكال}%
+  \def\listtablename{قائمة الجادول}%
+  \def\indexname{الفهارس}%
+  \def\figurename{شكلل}%
+  \def\tablename{جدولل}%
+  \def\partname{القسم}%
+  \def\enclname{المرفقات}
+  \def\ccname{نسخة موجهة إلى}% <<
+  \def\headtoname{إلى}
+  \def\pagename{صفحة}%
+  \def\seename{راجع}%انظر
+  \def\alsoname{راجع أيضا}%<<انظر
+  \def\proofname{برهان}% for AMS-\LaTeX
+  \def\glossaryname{معجم}%<<
   }
 
 \AtEndOfPackage{
