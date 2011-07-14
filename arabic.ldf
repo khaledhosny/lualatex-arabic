@@ -34,9 +34,9 @@
   }
 
 \AtEndOfPackage{
-\RequirePackage{luatextra}
+\RequirePackage{luatexbase}
 \RequirePackage{ifluatex}
-\luatexRequireModule{arabi}
+\RequireLuaModule{arabi}
 
 \ifluatex
 \else
@@ -140,7 +140,7 @@
    \ignorespaces
 }
 
-\def\datearabic{\def\today{\luadirect{tex.sprint(arabi.today())}}}
+\def\datearabic{\def\today{\directlua{tex.sprint(arabi.today())}}}
 
 \ldf@finish{arabic}
 
